@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+
+        function shuffle(arr, excludes) {
+            const excludes_arr = [];
+            const shuffle_arr = arr.filter((item, index) => {     // ezeket kell megkeverni
+                const ex = excludes.includes(item);
+                if (ex) {                                     // benne van az excludes listában
+                    excludes_arr.push([index, item]);
+                }
+                return !ex;
+            });
+            shuffle_arr.sort(() => Math.random() - 0.5);    // megkeverem
+            excludes_arr.forEach(item => shuffle_arr.splice(item[0], 0, item[1]));
+            return shuffle_arr;
+        }
+
+
+        const start = Date.now();
+        function shuffle(array) {
+            return array
+                .map(item => [Math.random(), item])
+                .sort((a, b) => a[0] - b[0])
+                .map(item => item[1]);
+        }
+
+        // counts of appearances for all possible permutations
+        let count = { '123': 0, '132': 0, '213': 0, '231': 0, '321': 0, '312': 0 };
+
+        for (let i = 0; i < 1000000; i++) {
+            let array = [1, 2, 3];
+            count[shuffle(array).join('')]++;
+        }
+
+        // show counts of all possible permutations
+        for (let key in count) {
+            console.log(`${key}: ${count[key]}`);
+        }
+        console.log(Date.now() - start);
+
+
+        Array.prototype.shuffle = function () {
+            const clone = [...this];
+            for (let i = clone.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [clone[i], clone[j]] = [clone[j], clone[i]];
+            }
+            return clone;
+        }
+
+        // 3-szor gyorsabb megoldás
+        const start = Date.now();
+        // counts of appearances for all possible permutations
+        let count = { '123': 0, '132': 0, '213': 0, '231': 0, '321': 0, '312': 0 };
+
+        let array = [1, 2, 3];
+        for (let i = 0; i < 1000000; i++) {
+            count[array.shuffle().join('')]++;
+        }
+
+        // show counts of all possible permutations
+        for (let key in count) {
+            console.log(`${key}: ${count[key]}`);
+        }
+        console.log(Date.now() - start);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        'use strict';
+
+        const user = {
+            firstName: 'John',
+            lastName: 'Doe',
+            age: '30'
+        }
+
+        const tag = (texts, ...values) =>
+            texts.map((text, index) => 
+                `${text}${values[index] ? `<strong>${values[index].toLocaleUpperCase()}</strong>` : ''}`
+            ).join('');
+
+        const template = tag`My name is ${user.firstName} ${user.lastName}, and I'm ${user.age} years old.`;
+
+        document.body.innerHTML = template;
+    </script>
+</body>
+</html>

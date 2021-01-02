@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <form>
+            <div>
+                <p>
+                    Pathology
+                </p>
+            </div>
+        </form>
+        <button class='click-me'>Click</button>
+<script>
+  document.querySelectorAll('*').forEach(element => {
+    element.addEventListener('click', () => console.log(`Capture: ${element.tagName}`), true);
+    element.addEventListener('click', () => console.log(`Bubble: ${element.tagName}`));
+  })
+
+  'use strict'
+  const btn = document.querySelector('.click-me');
+
+            btn.addEventListener('click', () => {
+                console.log('Listener 1');
+                setTimeout(console.log, 0, 'setTimout 1')
+                Promise
+                    .resolve('Promise 1')
+                    .then(console.log)
+
+            })
+
+            btn.addEventListener('click', () => {
+                console.log('Listener 2');
+                setTimeout(console.log, 0, 'setTimout 2')
+                Promise
+                    .resolve('Promise 2')
+                    .then(console.log)
+            })
+</script>
+</body>
+</html>
